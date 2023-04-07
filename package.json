@@ -17,9 +17,7 @@
     "aws-cdk",
     "aws-cdk-construct",
     "cloudfront",
-    "cloudfront-key-pair",
-    "cloudfront-trusted-group",
-    "cloudfront-trusted-group-key-pair"
+    "key-pair"
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
