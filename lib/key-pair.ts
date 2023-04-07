@@ -31,7 +31,7 @@ export class KeyPair extends Construct {
   }
 
   private createKeyPairFunction(): lambda.IFunction {
-    const projectRoot = path.join(__dirname, 'create-key-pair-lambda');
+    const projectRoot = path.join(__dirname, '../src/create-key-pair');
 
     const createKeyPairFunction = new NodejsFunction(
       this,

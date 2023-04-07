@@ -88,7 +88,7 @@ async function createKeyPair(
   props: CreateKeyPairResourceProperties,
 ): Promise<void> {
   try {
-    const { publicKey, privateKey } = await createRsaKeyPair();
+    const { publicKey, privateKey } = await exportKeyPair();
 
     console.log(publicKey);
     console.log(privateKey);
@@ -116,7 +116,7 @@ async function createKeyPair(
   }
 }
 
-async function createRsaKeyPair(): Promise<{
+async function exportKeyPair(): Promise<{
   publicKey: string | Buffer;
   privateKey: string | Buffer;
 }> {
