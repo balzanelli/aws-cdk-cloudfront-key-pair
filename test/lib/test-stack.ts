@@ -7,8 +7,8 @@ export class TestStack extends cdk.Stack {
     super(scope, id, props);
 
     new CloudFrontKeyPair(this, 'CloudFrontKeyPair', {
-      name: 'aws-cdk-cloudfront-key-pair',
-      description: 'AWS CDK CloudFront Key Pair',
+      name: 'cloudfront-key-pair',
+      description: 'CloudFront Key Pair',
     });
   }
 }
