@@ -1,3 +1,4 @@
+.github
 *.ts
 !*.d.ts
 jest.config.js
