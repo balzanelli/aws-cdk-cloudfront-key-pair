@@ -1,5 +1,10 @@
 *.ts
 !*.d.ts
+jest.config.js
+tsconfig.json
+test
+!src/create-key-pair/*
+src/create-key-pair/node_modules
 
 # CDK asset staging directory
 .cdk.staging
