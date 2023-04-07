@@ -1,0 +1,30 @@
+name: build
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths-ignore:
+      - '**.md'
+
+  pull_request:
+    branches:
+      - 'master'
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
