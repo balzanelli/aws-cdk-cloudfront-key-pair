@@ -1,4 +1,4 @@
-export * from './key-pair-props';
-export * from './key-pair';
-export * from './trusted-group-key-pair-props';
-export * from './trusted-group-key-pair';
+export { KeyPairProps } from './key-pair-props';
+export { KeyPair } from './key-pair';
+export { TrustedGroupKeyPairProps } from './trusted-group-key-pair-props';
+export { TrustedGroupKeyPair } from './trusted-group-key-pair';
