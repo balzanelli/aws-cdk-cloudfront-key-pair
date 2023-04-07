@@ -7,8 +7,13 @@ import * as path from 'path';
 import { KeyPairProps } from './key-pair-props';
 
 export class KeyPair extends Construct {
+  /** @readonly Content of the generated public key */
   readonly publicKey: string;
+
+  /** @readonly ARN of the public key secret */
   readonly publicKeyArn: string;
+
+  /** @readonly ARN of the private key secret */
   readonly privateKeyArn: string;
 
   constructor(scope: Construct, id: string, props: KeyPairProps) {
