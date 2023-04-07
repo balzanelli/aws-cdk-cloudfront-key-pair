@@ -91,7 +91,6 @@ async function createKeyPair(
     const { publicKey, privateKey } = await exportKeyPair();
 
     console.log(publicKey);
-    console.log(privateKey);
 
     const publicKeyArn = await createPublicKeySecret(publicKey, props);
     const privateKeyArn = await createPrivateKeySecret(privateKey, props);
