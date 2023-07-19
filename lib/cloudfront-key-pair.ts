@@ -28,6 +28,11 @@ export class CloudFrontKeyPair extends Construct {
       name: `${props.name}/public-key-id`,
       description: `${props.description} (Public Key ID)`,
       secretString: this.publicKey.publicKeyId,
+      replicaRegions: props.secretRegions?.map((region) => {
+        return {
+          region,
+        };
+      }),
     })
   }
 }

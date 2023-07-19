@@ -27,6 +27,7 @@ export class KeyPair extends Construct {
       properties: {
         Name: props.name,
         Description: props.description,
+        SecretRegions: props.secretRegions,
       },
     });
 
@@ -55,19 +56,12 @@ export class KeyPair extends Construct {
     );
     createKeyPairFunction.addToRolePolicy(
       new iam.PolicyStatement({
-        actions: ['secretsmanager:ListSecrets'],
-        resources: ['*'],
-      }),
-    );
-    createKeyPairFunction.addToRolePolicy(
-      new iam.PolicyStatement({
-        actions: ['secretsmanager:CreateSecret'],
-        resources: ['*'],
-      }),
-    );
-    createKeyPairFunction.addToRolePolicy(
-      new iam.PolicyStatement({
-        actions: ['secretsmanager:DeleteSecret'],
+        actions: [
+          'secretsmanager:CreateSecret',
+          'secretsmanager:DeleteSecret',
+          'secretsmanager:ListSecrets',
+          'secretsmanager:ReplicateSecretToRegions',
+        ],
         resources: ['*'],
       }),
     );

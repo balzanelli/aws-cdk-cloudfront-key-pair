@@ -1,5 +1,6 @@
 import { CloudFormationCustomResourceEvent } from 'aws-lambda';
 import { SecretsManager } from 'aws-sdk';
+import { ReplicaRegionType } from 'aws-sdk/clients/secretsmanager';
 import { generateKeyPair } from 'crypto';
 import * as https from 'https';
 import { promisify } from 'util';
@@ -7,6 +8,7 @@ import { promisify } from 'util';
 export interface CreateKeyPairResourceProperties {
   readonly Name: string;
   readonly Description: string;
+  readonly SecretRegions?: string[];
 }
 
 const secretsManager = new SecretsManager();
@@ -135,6 +137,16 @@ async function exportKeyPair(): Promise<{
   };
 }
 
+function getSecretReplicaRegions(
+  regions?: string[] | undefined,
+): ReplicaRegionType[] | undefined {
+  return regions?.map((region) => {
+    return {
+      Region: region,
+    };
+  });
+}
+
 async function createPublicKeySecret(
   publicKey: string | Buffer,
   props: CreateKeyPairResourceProperties,
@@ -146,6 +158,7 @@ async function createPublicKeySecret(
       Name: name,
       Description: `${props.Description} (Public Key)`,
       SecretString: publicKey.toString(),
+      AddReplicaRegions: getSecretReplicaRegions(props.SecretRegions),
     })
     .promise();
 
@@ -167,6 +180,7 @@ async function createPrivateKeySecret(
       Name: name,
       Description: `${props.Description} (Private Key)`,
       SecretString: privateKey.toString(),
+      AddReplicaRegions: getSecretReplicaRegions(props.SecretRegions),
     })
     .promise();
 
