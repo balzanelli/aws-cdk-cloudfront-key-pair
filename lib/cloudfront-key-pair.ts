@@ -1,5 +1,6 @@
 import { Construct } from 'constructs';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import { CloudFrontKeyPairProps } from './cloudfront-key-pair-props';
 import { KeyPair } from './key-pair';
 
@@ -22,5 +23,11 @@ export class CloudFrontKeyPair extends Construct {
       comment: props.description,
       encodedKey: this.keyPair.publicKey,
     });
+
+    new secretsmanager.CfnSecret(this, 'PublicKeyIdSecret', {
+      name: `${props.name}/public-key-id`,
+      description: `${props.description} (Public Key ID)`,
+      secretString: this.publicKey.publicKeyId,
+    })
   }
 }
